@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-06-23
+
+### Changed
+
+- Bundle identifier renamed from the placeholder `com.yourname.caffeinate` to
+  `com.guilhermebueno.caffeinate` (and the test target to `com.guilhermebueno.caffeinate.tests`).
+  `BUILD.md` updated to reflect the real identifier.
+
 ## [1.0.0] - 2026-06-23
 
 ### Added
@@ -19,5 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Menu-bar-only agent (`LSUIElement`) — no Dock icon, no window.
 - Fully offline: no network, analytics, or telemetry. Apple SDK only, no third-party dependencies.
 
-[Unreleased]: https://github.com/buenoguilherme/caffeinate-macos-app/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/buenoguilherme/caffeinate-macos-app/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/buenoguilherme/caffeinate-macos-app/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/buenoguilherme/caffeinate-macos-app/releases/tag/v1.0.0

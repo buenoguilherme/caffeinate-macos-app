@@ -23,8 +23,8 @@ xcodebuild test -project Caffeinate.xcodeproj -scheme Caffeinate \
 
 ## Distribution build
 
-1. In Xcode, set the bundle ID to your own (replace `com.yourname.caffeinate`
-   in the project's build settings).
+1. The project's bundle ID is `com.guilhermebueno.caffeinate`. If you maintain
+   your own fork, replace it with your own identifier in the project's build settings.
 2. Select the Caffeinate scheme → **Product → Archive**.
 3. In the Organizer, choose **Distribute App → Developer ID → Export**.
 
