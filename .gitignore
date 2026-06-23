@@ -1,0 +1,32 @@
+# Xcode
+*.xcworkspace
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+DerivedData/
+*.moved-aside
+*.pbxuser
+
+# Build
+build/
+*.o
+*.d
+
+# macOS
+.DS_Store
+Thumbs.db
+*.swp
+
+# Swift Package Manager
+.build/
+Packages/
+Package.resolved
+
+# Codesigning
+*.p12
+*.cer
+*.mobileprovision
+
+# Environment
+.env
+*.log
