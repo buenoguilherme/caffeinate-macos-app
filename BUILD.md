@@ -1,0 +1,57 @@
+# Build, Sign, Notarize & Package
+
+## Prerequisites
+
+- macOS 13.0+
+- Xcode 15+ with a valid Apple Developer account
+- Developer ID Application signing certificate
+
+## Build (debug)
+
+```sh
+open Caffeinate.xcodeproj
+# Press ⌘R, or from the command line:
+xcodebuild -project Caffeinate.xcodeproj -scheme Caffeinate -configuration Debug build
+```
+
+## Run unit tests
+
+```sh
+xcodebuild test -project Caffeinate.xcodeproj -scheme Caffeinate \
+  -destination 'platform=macOS'
+```
+
+## Distribution build
+
+1. In Xcode, set the bundle ID to your own (replace `com.yourname.caffeinate`
+   in the project's build settings).
+2. Select the Caffeinate scheme → **Product → Archive**.
+3. In the Organizer, choose **Distribute App → Developer ID → Export**.
+
+## Notarize and staple
+
+```sh
+# Submit for notarization (replace placeholders)
+xcrun notarytool submit Caffeinate.app.zip \
+  --apple-id "your@email.com" \
+  --password "@keychain:AC_PASSWORD" \
+  --team-id "XXXXXXXXXX" \
+  --wait
+
+# Staple the ticket
+xcrun stapler staple Caffeinate.app
+```
+
+## Package as .dmg
+
+```sh
+# Using create-dmg (brew install create-dmg), or Disk Utility
+create-dmg \
+  --volname "Caffeinate" \
+  --window-pos 200 120 \
+  --window-size 600 400 \
+  --icon-size 100 \
+  --app-drop-link 450 185 \
+  "Caffeinate.dmg" \
+  "Caffeinate.app"
+```

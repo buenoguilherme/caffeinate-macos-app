@@ -47,10 +47,10 @@ description: "Task list for Status Bar Sleep Toggle implementation"
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T006 Create `Caffeinate/CaffeinateApp.swift` — `@main struct CaffeinateApp: App` using `@NSApplicationDelegateAdaptor(AppDelegate.self)`; declare no `WindowGroup` (use an empty `Settings {}` scene or equivalent) so no window appears.
-- [ ] T007 Create `Caffeinate/AppDelegate.swift` — `NSApplicationDelegate`; in `applicationDidFinishLaunching` set `NSApp.setActivationPolicy(.accessory)`, instantiate `AppState`, and create the `StatusBarController` holding a reference to `AppState`.
-- [ ] T008 [P] Create `Caffeinate/AppState.swift` — `final class AppState: ObservableObject` with `@Published private(set) var isActive: Bool = false` and `@Published var launchAtLogin: Bool = false` (skeleton; method bodies wired in story phases per contracts/internal-interfaces.md).
-- [ ] T009 Create `Caffeinate/StatusBarController.swift` — owns an `NSStatusItem` from `NSStatusBar.system` with `.variableLength`, attaches an empty `NSMenu`, and sets a placeholder button image. (Depends on T007 for instantiation.)
+- [x] T006 Create `Caffeinate/CaffeinateApp.swift` — `@main struct CaffeinateApp: App` using `@NSApplicationDelegateAdaptor(AppDelegate.self)`; declare no `WindowGroup` (use an empty `Settings {}` scene or equivalent) so no window appears.
+- [x] T007 Create `Caffeinate/AppDelegate.swift` — `NSApplicationDelegate`; in `applicationDidFinishLaunching` set `NSApp.setActivationPolicy(.accessory)`, instantiate `AppState`, and create the `StatusBarController` holding a reference to `AppState`.
+- [x] T008 [P] Create `Caffeinate/AppState.swift` — `final class AppState: ObservableObject` with `@Published private(set) var isActive: Bool = false` and `@Published var launchAtLogin: Bool = false` (skeleton; method bodies wired in story phases per contracts/internal-interfaces.md).
+- [x] T009 Create `Caffeinate/StatusBarController.swift` — owns an `NSStatusItem` from `NSStatusBar.system` with `.variableLength`, attaches an empty `NSMenu`, and sets a placeholder button image. (Depends on T007 for instantiation.)
 
 **Checkpoint**: A coffee-cup status item appears with an empty menu; foundation ready for stories.
 
@@ -66,13 +66,13 @@ description: "Task list for Status Bar Sleep Toggle implementation"
 
 > Write these FIRST and confirm they FAIL before implementing T011.
 
-- [ ] T010 [P] [US1] Create `CaffeinateTests/CaffeinateManagerTests.swift` — assert: `activate()` sets `isActive == true`; `deactivate()` sets `isActive == false`; `activate(); activate()` holds exactly one assertion (no stacking, FR-012); `deactivate()` while inactive is a no-op; **`isActive` stays `false` if assertion creation fails** (IOReturn error path). *(Gap added — failure-path coverage.)*
+- [x] T010 [P] [US1] Create `CaffeinateTests/CaffeinateManagerTests.swift` — assert: `activate()` sets `isActive == true`; `deactivate()` sets `isActive == false`; `activate(); activate()` holds exactly one assertion (no stacking, FR-012); `deactivate()` while inactive is a no-op; **`isActive` stays `false` if assertion creation fails** (IOReturn error path). *(Gap added — failure-path coverage.)*
 
 ### Implementation for User Story 1
 
-- [ ] T011 [US1] Create `Caffeinate/CaffeinateManager.swift` — singleton with `activate()` / `deactivate()` calling `IOPMAssertionCreateWithName` using `kIOPMAssertionTypeNoDisplaySleep` and `kIOPMAssertPreventUserIdleSystemSleep`, storing `assertionID: IOPMAssertionID?`. **Check the returned `IOReturn`; only set state/store the ID on `kIOReturnSuccess`, otherwise leave inactive** (FR-012, no half-state). Idempotent both directions; expose `var isActive: Bool`. (Makes T010 pass.) *(Gap added — IOReturn error handling.)*
-- [ ] T012 [US1] Implement `AppState.toggleSleepPrevention()` in `Caffeinate/AppState.swift` — flips state, calls `CaffeinateManager.activate()`/`deactivate()`, updates `@Published isActive` to mirror the manager's actual `isActive` (so a failed activate is reflected).
-- [ ] T013 [US1] In `Caffeinate/StatusBarController.swift`, add the "Prevent Sleep" `NSMenuItem` whose action calls `AppState.toggleSleepPrevention()` (target/action wired to the controller).
+- [x] T011 [US1] Create `Caffeinate/CaffeinateManager.swift` — singleton with `activate()` / `deactivate()` calling `IOPMAssertionCreateWithName` using `kIOPMAssertionTypeNoDisplaySleep` and `kIOPMAssertPreventUserIdleSystemSleep`, storing `assertionID: IOPMAssertionID?`. **Check the returned `IOReturn`; only set state/store the ID on `kIOReturnSuccess`, otherwise leave inactive** (FR-012, no half-state). Idempotent both directions; expose `var isActive: Bool`. (Makes T010 pass.) *(Gap added — IOReturn error handling.)*
+- [x] T012 [US1] Implement `AppState.toggleSleepPrevention()` in `Caffeinate/AppState.swift` — flips state, calls `CaffeinateManager.activate()`/`deactivate()`, updates `@Published isActive` to mirror the manager's actual `isActive` (so a failed activate is reflected).
+- [x] T013 [US1] In `Caffeinate/StatusBarController.swift`, add the "Prevent Sleep" `NSMenuItem` whose action calls `AppState.toggleSleepPrevention()` (target/action wired to the controller).
 
 **Checkpoint**: US1 fully functional — sleep prevention can be toggled and verifiably keeps the Mac awake. MVP reached.
 
@@ -86,9 +86,9 @@ description: "Task list for Status Bar Sleep Toggle implementation"
 
 ### Implementation for User Story 2
 
-- [ ] T014 [P] [US2] Add icon assets to `Caffeinate/Assets.xcassets`: `caffeinate-off` (outline cup, "Render As: Template Image") and `caffeinate-on` (filled cup, accent-colored). (SF Symbols `cup.and.saucer` / `.fill` are an acceptable code-only alternative per research.md §6 — if used, skip this asset task.)
-- [ ] T015 [US2] Wire `AppState` → `StatusBarController` in `Caffeinate/StatusBarController.swift`: observe `@Published isActive` (Combine sink or KVO), swap `statusItem.button?.image` between the off/on icons, and set the "Prevent Sleep" menu item's `.state` (`.on`/`.off`) accordingly (FR-005, FR-006).
-- [ ] T016 [P] [US2] In `Caffeinate/StatusBarController.swift`, set the status item button's `accessibilityLabel` and `toolTip` to reflect the current state (e.g. "Caffeinate: On"/"Off") so the state is conveyed to VoiceOver and on hover. *(Gap added — accessibility / glanceability for SC-004.)*
+- [x] T014 [P] [US2] Add icon assets to `Caffeinate/Assets.xcassets`: `caffeinate-off` (outline cup, "Render As: Template Image") and `caffeinate-on` (filled cup, accent-colored). (SF Symbols `cup.and.saucer` / `.fill` are an acceptable code-only alternative per research.md §6 — if used, skip this asset task.)
+- [x] T015 [US2] Wire `AppState` → `StatusBarController` in `Caffeinate/StatusBarController.swift`: observe `@Published isActive` (Combine sink or KVO), swap `statusItem.button?.image` between the off/on icons, and set the "Prevent Sleep" menu item's `.state` (`.on`/`.off`) accordingly (FR-005, FR-006).
+- [x] T016 [P] [US2] In `Caffeinate/StatusBarController.swift`, set the status item button's `accessibilityLabel` and `toolTip` to reflect the current state (e.g. "Caffeinate: On"/"Off") so the state is conveyed to VoiceOver and on hover. *(Gap added — accessibility / glanceability for SC-004.)*
 
 **Checkpoint**: US1 + US2 both work — state is glanceable.
 
@@ -102,8 +102,8 @@ description: "Task list for Status Bar Sleep Toggle implementation"
 
 ### Implementation for User Story 4
 
-- [ ] T017 [US4] In `Caffeinate/StatusBarController.swift`, add the "Quit Caffeinate" `NSMenuItem` whose action calls `NSApp.terminate(nil)`.
-- [ ] T018 [US4] Implement `AppState.prepareForTermination()` (releases assertion if active) and call it from `AppDelegate.applicationWillTerminate(_:)` in `Caffeinate/AppDelegate.swift`; add a `deinit` release backstop in `Caffeinate/CaffeinateManager.swift` (FR-009, FR-010).
+- [x] T017 [US4] In `Caffeinate/StatusBarController.swift`, add the "Quit Caffeinate" `NSMenuItem` whose action calls `NSApp.terminate(nil)`.
+- [x] T018 [US4] Implement `AppState.prepareForTermination()` (releases assertion if active) and call it from `AppDelegate.applicationWillTerminate(_:)` in `Caffeinate/AppDelegate.swift`; add a `deinit` release backstop in `Caffeinate/CaffeinateManager.swift` (FR-009, FR-010).
 
 **Checkpoint**: US1 + US2 + US4 work — clean teardown guaranteed.
 
@@ -117,9 +117,9 @@ description: "Task list for Status Bar Sleep Toggle implementation"
 
 ### Implementation for User Story 3
 
-- [ ] T019 [P] [US3] Create `Caffeinate/LaunchAtLogin.swift` — `enum LaunchAtLogin` with `static var isEnabled` (`SMAppService.mainApp.status == .enabled`), `static func enable() throws` (`register()`), `static func disable() throws` (`unregister()`).
-- [ ] T020 [US3] In `Caffeinate/AppState.swift`, implement `setLaunchAtLogin(_:)` and initialize `launchAtLogin` from `LaunchAtLogin.isEnabled`; tolerate thrown errors by re-reading actual status (no crash, FR-007/FR-008).
-- [ ] T021 [US3] In `Caffeinate/StatusBarController.swift`, add the "Launch at Login" `NSMenuItem`; reflect `AppState.launchAtLogin` as its `.state` and toggle it via `AppState.setLaunchAtLogin(_:)`. **Handle the `SMAppService` `.requiresApproval` status by opening System Settings → Login Items** (`SMAppService.openSystemSettingsLoginItems()`) so the user can approve. *(Gap added — approval flow.)*
+- [x] T019 [P] [US3] Create `Caffeinate/LaunchAtLogin.swift` — `enum LaunchAtLogin` with `static var isEnabled` (`SMAppService.mainApp.status == .enabled`), `static func enable() throws` (`register()`), `static func disable() throws` (`unregister()`).
+- [x] T020 [US3] In `Caffeinate/AppState.swift`, implement `setLaunchAtLogin(_:)` and initialize `launchAtLogin` from `LaunchAtLogin.isEnabled`; tolerate thrown errors by re-reading actual status (no crash, FR-007/FR-008).
+- [x] T021 [US3] In `Caffeinate/StatusBarController.swift`, add the "Launch at Login" `NSMenuItem`; reflect `AppState.launchAtLogin` as its `.state` and toggle it via `AppState.setLaunchAtLogin(_:)`. **Handle the `SMAppService` `.requiresApproval` status by opening System Settings → Login Items** (`SMAppService.openSystemSettingsLoginItems()`) so the user can approve. *(Gap added — approval flow.)*
 
 **Checkpoint**: All four user stories independently functional.
 
@@ -129,12 +129,12 @@ description: "Task list for Status Bar Sleep Toggle implementation"
 
 **Purpose**: Validation, distribution, and final checks.
 
-- [ ] T022 Run `xcodebuild test -project Caffeinate.xcodeproj -scheme Caffeinate -destination 'platform=macOS'` and confirm `CaffeinateManagerTests` pass.
+- [x] T022 Run `xcodebuild test -project Caffeinate.xcodeproj -scheme Caffeinate -destination 'platform=macOS'` and confirm `CaffeinateManagerTests` pass.
 - [ ] T023 Execute the full validation guide in `specs/001-status-bar-sleep-toggle/quickstart.md` (US1–US4 scenarios + edge cases), including `pmset -g assertions` (no leak) and `nettop` (zero network, FR-013).
-- [ ] T024 [P] Add an `AppIcon` image set to `Caffeinate/Assets.xcassets` (used by Finder and the `.dmg` even though there is no Dock icon at runtime). *(Gap added — bundle/Finder icon.)*
+- [x] T024 [P] Add an `AppIcon` image set to `Caffeinate/Assets.xcassets` (used by Finder and the `.dmg` even though there is no Dock icon at runtime). *(Gap added — bundle/Finder icon.)*
 - [ ] T025 Build the distributable `.dmg`: Xcode Archive → export with Developer ID → **notarize and staple** (`xcrun notarytool` + `stapler`), then package via `create-dmg` (or Disk Utility) per constitution (.dmg direct download).
-- [ ] T026 [P] Final code review against the constitution: no Dock icon/window (Principle II), Apple SDK only / no third-party deps (Principle III), native IOKit only / no `caffeinate` subprocess (Principle IV), no network/analytics (Principle V).
-- [ ] T027 [P] Create `README.md` (what the app does + one-screenshot usage) and `BUILD.md` (build, sign, notarize, package steps from T025) at repo root. *(Gap added — user/maintainer docs.)*
+- [x] T026 [P] Final code review against the constitution: no Dock icon/window (Principle II), Apple SDK only / no third-party deps (Principle III), native IOKit only / no `caffeinate` subprocess (Principle IV), no network/analytics (Principle V).
+- [x] T027 [P] Create `README.md` (what the app does + one-screenshot usage) and `BUILD.md` (build, sign, notarize, package steps from T025) at repo root. *(Gap added — user/maintainer docs.)*
 
 ---
 
