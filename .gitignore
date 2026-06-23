@@ -34,3 +34,10 @@ Package.resolved
 # Environment
 .env
 *.log
+
+# Release packaging artifacts (regenerable)
+*.dmg
+dmg-staging/
+AppIcon.iconset/
+AppIcon.icns
+icon_1024.png
