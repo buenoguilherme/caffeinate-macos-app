@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Standard macOS runners are free with no minute cap on public repositories.
+jobs:
+  test:
+    name: Build & test
+    runs-on: macos-latest
+    env:
+      COVERAGE_FLOOR: "0.90"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Run tests with coverage
+        run: ./scripts/coverage.sh
+
+      - name: Enforce coverage floor
+        run: |
+          PCT=$(xcrun xccov view --report --json build/Coverage.xcresult \
+            | python3 -c "import json,sys; print(json.load(sys.stdin)['targets'][0]['lineCoverage'])")
+          echo "Line coverage: $PCT (floor: $COVERAGE_FLOOR)"
+          python3 -c "import sys; sys.exit(0 if float('$PCT') >= float('$COVERAGE_FLOOR') else 1)" \
+            || { echo "::error::Coverage $PCT is below floor $COVERAGE_FLOOR"; exit 1; }
