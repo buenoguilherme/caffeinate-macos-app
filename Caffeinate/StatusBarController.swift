@@ -4,16 +4,16 @@ import ServiceManagement
 
 final class StatusBarController {
     private let statusItem: NSStatusItem
-    private let menu = NSMenu()
+    let menu = NSMenu()
     private let appState: AppState
     private var cancellables = Set<AnyCancellable>()
 
-    private let preventSleepItem = NSMenuItem(
+    let preventSleepItem = NSMenuItem(
         title: "Prevent Sleep",
         action: #selector(toggleSleepPrevention),
         keyEquivalent: ""
     )
-    private let launchAtLoginItem = NSMenuItem(
+    let launchAtLoginItem = NSMenuItem(
         title: "Launch at Login",
         action: #selector(toggleLaunchAtLogin),
         keyEquivalent: ""
@@ -77,12 +77,12 @@ final class StatusBarController {
         launchAtLoginItem.state = appState.isLaunchAtLoginEnabled ? .on : .off
     }
 
-    @objc private func toggleSleepPrevention() {
+    @objc func toggleSleepPrevention() {
         appState.toggleSleepPrevention()
         launchAtLoginItem.state = appState.isLaunchAtLoginEnabled ? .on : .off
     }
 
-    @objc private func toggleLaunchAtLogin() {
+    @objc func toggleLaunchAtLogin() {
         let newValue = !appState.isLaunchAtLoginEnabled
         appState.setLaunchAtLogin(newValue)
 
@@ -94,7 +94,7 @@ final class StatusBarController {
         launchAtLoginItem.state = appState.isLaunchAtLoginEnabled ? .on : .off
     }
 
-    @objc private func quitApp() {
+    @objc func quitApp() {
         NSApp.terminate(nil)
     }
 }

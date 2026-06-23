@@ -21,6 +21,19 @@ xcodebuild test -project Caffeinate.xcodeproj -scheme Caffeinate \
   -destination 'platform=macOS'
 ```
 
+## Code coverage
+
+Run the test suite with coverage and print a per-file summary for the app target:
+
+```sh
+./scripts/coverage.sh
+```
+
+The script enables coverage, writes `build/Coverage.xcresult`, and prints the
+overall and per-file coverage via `xccov`. Coverage is also enabled in the shared
+`Caffeinate` scheme, so the Xcode coverage report is populated when running tests
+from the IDE.
+
 ## Distribution build
 
 1. The project's bundle ID is `com.guilhermebueno.caffeinate`. If you maintain

@@ -5,10 +5,17 @@ final class AppState: ObservableObject {
     @Published private(set) var isPreventingSleep: Bool = false
 
     var isLaunchAtLoginEnabled: Bool {
-        LaunchAtLogin.isEnabled
+        launchAtLogin.isEnabled
     }
 
-    private let manager = CaffeinateManager()
+    private let manager: SleepPreventing
+    private let launchAtLogin: LaunchAtLoginManaging
+
+    init(manager: SleepPreventing = CaffeinateManager(),
+         launchAtLogin: LaunchAtLoginManaging = SystemLaunchAtLogin()) {
+        self.manager = manager
+        self.launchAtLogin = launchAtLogin
+    }
 
     func toggleSleepPrevention() {
         if manager.isActive {
@@ -22,9 +29,9 @@ final class AppState: ObservableObject {
     func setLaunchAtLogin(_ enabled: Bool) {
         do {
             if enabled {
-                try LaunchAtLogin.enable()
+                try launchAtLogin.enable()
             } else {
-                try LaunchAtLogin.disable()
+                try launchAtLogin.disable()
             }
         } catch {
             // Reflect the actual state after any error (e.g. requires approval)

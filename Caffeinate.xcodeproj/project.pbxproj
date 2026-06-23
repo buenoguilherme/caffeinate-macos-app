@@ -13,6 +13,13 @@
 		BB1111111111111111111104 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1111111111111111111104 /* AppState.swift */; };
 		BB1111111111111111111105 /* LaunchAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1111111111111111111105 /* LaunchAtLogin.swift */; };
 		BB1111111111111111111106 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1111111111111111111106 /* StatusBarController.swift */; };
+		BB1111111111111111111110 /* SleepPreventing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1111111111111111111110 /* SleepPreventing.swift */; };
+		BB1111111111111111111111 /* LaunchAtLoginManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1111111111111111111111 /* LaunchAtLoginManaging.swift */; };
+		BB1111111111111111111112 /* TestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1111111111111111111112 /* TestSupport.swift */; };
+		BB1111111111111111111113 /* AppStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1111111111111111111113 /* AppStateTests.swift */; };
+		BB1111111111111111111114 /* LaunchAtLoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1111111111111111111114 /* LaunchAtLoginTests.swift */; };
+		BB1111111111111111111115 /* StatusBarControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1111111111111111111115 /* StatusBarControllerTests.swift */; };
+		BB1111111111111111111116 /* AppDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1111111111111111111116 /* AppDelegateTests.swift */; };
 		BB1111111111111111111107 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1111111111111111111107 /* Assets.xcassets */; };
 		BB1111111111111111111109 /* CaffeinateManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1111111111111111111109 /* CaffeinateManagerTests.swift */; };
 		BB111111111111111111110A /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA111111111111111111110A /* IOKit.framework */; };
@@ -37,9 +44,16 @@
 		AA1111111111111111111104 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		AA1111111111111111111105 /* LaunchAtLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLogin.swift; sourceTree = "<group>"; };
 		AA1111111111111111111106 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
+		AA1111111111111111111110 /* SleepPreventing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepPreventing.swift; sourceTree = "<group>"; };
+		AA1111111111111111111111 /* LaunchAtLoginManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginManaging.swift; sourceTree = "<group>"; };
 		AA1111111111111111111107 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA1111111111111111111108 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA1111111111111111111109 /* CaffeinateManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeinateManagerTests.swift; sourceTree = "<group>"; };
+		AA1111111111111111111112 /* TestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSupport.swift; sourceTree = "<group>"; };
+		AA1111111111111111111113 /* AppStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateTests.swift; sourceTree = "<group>"; };
+		AA1111111111111111111114 /* LaunchAtLoginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginTests.swift; sourceTree = "<group>"; };
+		AA1111111111111111111115 /* StatusBarControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarControllerTests.swift; sourceTree = "<group>"; };
+		AA1111111111111111111116 /* AppDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateTests.swift; sourceTree = "<group>"; };
 		AA111111111111111111110A /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		AA111111111111111111110B /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		AA111111111111111111110C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -87,6 +101,8 @@
 				AA1111111111111111111104 /* AppState.swift */,
 				AA1111111111111111111105 /* LaunchAtLogin.swift */,
 				AA1111111111111111111106 /* StatusBarController.swift */,
+				AA1111111111111111111110 /* SleepPreventing.swift */,
+				AA1111111111111111111111 /* LaunchAtLoginManaging.swift */,
 				AA1111111111111111111107 /* Assets.xcassets */,
 				AA1111111111111111111108 /* Info.plist */,
 			);
@@ -97,6 +113,11 @@
 			isa = PBXGroup;
 			children = (
 				AA1111111111111111111109 /* CaffeinateManagerTests.swift */,
+				AA1111111111111111111112 /* TestSupport.swift */,
+				AA1111111111111111111113 /* AppStateTests.swift */,
+				AA1111111111111111111114 /* LaunchAtLoginTests.swift */,
+				AA1111111111111111111115 /* StatusBarControllerTests.swift */,
+				AA1111111111111111111116 /* AppDelegateTests.swift */,
 			);
 			path = CaffeinateTests;
 			sourceTree = "<group>";
@@ -217,6 +238,8 @@
 				BB1111111111111111111104 /* AppState.swift in Sources */,
 				BB1111111111111111111105 /* LaunchAtLogin.swift in Sources */,
 				BB1111111111111111111106 /* StatusBarController.swift in Sources */,
+				BB1111111111111111111110 /* SleepPreventing.swift in Sources */,
+				BB1111111111111111111111 /* LaunchAtLoginManaging.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +248,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB1111111111111111111109 /* CaffeinateManagerTests.swift in Sources */,
+				BB1111111111111111111112 /* TestSupport.swift in Sources */,
+				BB1111111111111111111113 /* AppStateTests.swift in Sources */,
+				BB1111111111111111111114 /* LaunchAtLoginTests.swift in Sources */,
+				BB1111111111111111111115 /* StatusBarControllerTests.swift in Sources */,
+				BB1111111111111111111116 /* AppDelegateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
