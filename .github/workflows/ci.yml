@@ -6,14 +6,15 @@ on:
   pull_request:
 
 # Standard macOS runners are free with no minute cap on public repositories.
+# Pinned to macos-15 to avoid the automatic macOS 26 migration of macos-latest.
 jobs:
   test:
     name: Build & test
-    runs-on: macos-latest
+    runs-on: macos-15
     env:
       COVERAGE_FLOOR: "0.90"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Show Xcode version
         run: xcodebuild -version
